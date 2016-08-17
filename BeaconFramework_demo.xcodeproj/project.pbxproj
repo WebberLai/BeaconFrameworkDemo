@@ -61,7 +61,7 @@
 /* Begin PBXFileReference section */
 		51BDBA6505A709DED493EC4F /* Pods-BeaconFramework_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaconFramework_demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaconFramework_demo/Pods-BeaconFramework_demo.debug.xcconfig"; sourceTree = "<group>"; };
 		60AB48371D64459100C9EDDB /* BeaconFramework_demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeaconFramework_demo-Bridging-Header.h"; sourceTree = "<group>"; };
-		B449BE421CABDD34008CF61E /* BeaconFramework_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconFramework_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B449BE421CABDD34008CF61E /* Beacon Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beacon Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B449BE5A1CABDD34008CF61E /* BeaconFramework_demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeaconFramework_demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B449BE5E1CABDD34008CF61E /* BeaconFramework_demoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconFramework_demoTests.swift; sourceTree = "<group>"; };
 		B449BE601CABDD34008CF61E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		B449BE431CABDD34008CF61E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B449BE421CABDD34008CF61E /* BeaconFramework_demo.app */,
+				B449BE421CABDD34008CF61E /* Beacon Demo.app */,
 				B449BE5A1CABDD34008CF61E /* BeaconFramework_demoTests.xctest */,
 				B449BE651CABDD35008CF61E /* BeaconFramework_demoUITests.xctest */,
 			);
@@ -221,7 +221,7 @@
 			);
 			name = BeaconFramework_demo;
 			productName = BeaconFramework_demo;
-			productReference = B449BE421CABDD34008CF61E /* BeaconFramework_demo.app */;
+			productReference = B449BE421CABDD34008CF61E /* Beacon Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B449BE591CABDD34008CF61E /* BeaconFramework_demoTests */ = {
@@ -546,7 +546,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "iii.ideas.BeaconFramework-demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Beacon Demo";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeaconFramework_demo/BeaconFramework_demo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -572,7 +572,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "iii.ideas.BeaconFramework-demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Beacon Demo";
 				SWIFT_OBJC_BRIDGING_HEADER = "BeaconFramework_demo/BeaconFramework_demo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
