@@ -7,14 +7,24 @@
 //
 
 import UIKit
+import BeaconFramework
+import PopupDialog
 
 class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     var pageViewController: UIPageViewController?
 
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    var queueNotis = NSMutableArray()
+    
+    var currentPopAlert : UIViewController = UIViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appDelegate.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageViewController = UIPageViewController(transitionStyle: .PageCurl, navigationOrientation: .Horizontal, options: nil)
@@ -82,12 +92,73 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         } else {
             let previousViewController = self.modelController.pageViewController(self.pageViewController!, viewControllerBeforeViewController: currentViewController)
             viewControllers = [previousViewController!, currentViewController]
-        }
+        } 
         self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: {done in })
 
         return .Mid
     }
-
-
 }
+
+extension RootViewController : BeaconDelegate{
+    
+    func updateScanBeaconResult(result: NotiObject) {
+        self.addMessageToQueue(result)
+    }
+    
+    func addMessageToQueue(message : NotiObject){
+        
+        queueNotis.addObject(message)
+        if  queueNotis.count == 1{
+            dispatch_async(dispatch_get_main_queue()) {
+                self.showImageDialog(message)
+            }
+        }
+    }
+    
+    func removeFirstMessageQueue(){
+        queueNotis.removeObjectAtIndex(0)
+        if queueNotis.count > 0 {
+            let msg : NotiObject = queueNotis.objectAtIndex(0) as! NotiObject
+            dispatch_async(dispatch_get_main_queue()) {
+                self.showImageDialog(msg)
+            }
+        }
+    }
+    
+    
+    func showImageDialog(result: NotiObject) {
+        
+        // Prepare the popup assets
+        let title = result.briefDesc
+        let message = result.detailDesc
+        var image : UIImage?
+        
+        let url = NSURL(string: result.photoURL!)
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            let data = NSData(contentsOfURL: url!)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                image = UIImage(data: data!)
+                
+                let popup = PopupDialog(title: title, message: message, image: image)
+                
+                let buttonOne = CancelButton(title: "OK") {
+                    self.removeFirstMessageQueue()
+                }
+                
+                // Add buttons to dialog
+                
+                popup.addButtons([buttonOne])
+                // Present dialog
+                self.currentPopAlert = popup
+                self.presentViewController(popup, animated: true, completion: nil)
+                
+            });
+        }
+    }
+}
+
 

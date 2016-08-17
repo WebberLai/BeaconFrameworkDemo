@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "193597B6F5998B91CF35147CE94B17FE9A519F12",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F2E32EF01FA7E88218C1271D5D658A77E5936C4A" : 9223372036854775807,
+    "193597B6F5998B91CF35147CE94B17FE9A519F12" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "045DDC61-4260-4026-9DB2-4F0078593D18",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F2E32EF01FA7E88218C1271D5D658A77E5936C4A" : "",
+    "193597B6F5998B91CF35147CE94B17FE9A519F12" : "BeaconFrameworkDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BeaconFramework_demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BeaconFramework_demo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/WebberLai\/BeaconFrameworkDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "193597B6F5998B91CF35147CE94B17FE9A519F12"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mobile-web-messaging\/MQTTKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2E32EF01FA7E88218C1271D5D658A77E5936C4A"
+    }
+  ]
+}

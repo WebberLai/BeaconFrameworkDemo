@@ -9,8 +9,31 @@
 import UIKit
 import BeaconFramework
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, IIIBeaconDetectionDelegate {
+@objc protocol BeaconDelegate:class
+{
+    @objc optional func updateScanBeaconResult (result : NotiObject);
+}
+
+class NotiObject: NSObject {
+    
+    var isProduct : Bool?
+    var briefDesc : String?
+    var detailDesc : String?
+    var others : String?
+    var susplus : NSNumber?
+    var startDate : String?
+    var endDate : String?
+    var photoURL : String?
+    var discount : NSNumber?
+    var quantity : NSNumber?
+    var templateName : String?
+    var originPrice : NSNumber?
+    var discountPrice : NSNumber?
+    var beaconID : String?
+}
+
+
+@UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate, IIIBeaconDetectionDelegate {
     
     var window: UIWindow?
     
@@ -18,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IIIBeaconDetectionDelegat
     var notification = Notification()
     var detection = IIIBeaconDetection()
     var iiibeacon = IIIBeacon()
+    
+    weak var delegate : BeaconDelegate?
     
     //建立推播內容物件列表r
     var message_list: [_Message] = []
@@ -96,40 +121,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IIIBeaconDetectionDelegat
                     value.message = Notification.message()
                     value.uuid = item.id
                     
-                    // print("value.message : \(value.message)")
-                    // print("value.uuid : \(value.uuid)")
-                    
                     //取得Beacon對應推播內容
                     ////Production Environment ( If Test Environment, Please use get_push_message("52.69.184.56", ....) )
                     notification.get_push_message("52.69.184.56", beacon_id: item.id!, key: "6661c6d4ed782d4db9060d47e11ee627748d6dc1" ){ (completion) -> () in
                         
                         if(completion.Sucess){
                             
-                            
                             if completion.msg.content!.products.count > 0{
-                                /*
-                                    已取得 496 產品照片 : http://s3-ap-northeast-1.amazonaws.com/beacons.management.production/content_files/65/original/ad37ac4f5bc93bbfe26ae6bc61a1051057a73649.png?1470977797
-                                    SELLER : ilidtec
-                                    PRODUCT DESC皮卡丘
-                                 */
-                                print("已取得 " + item.id! + " 產品照片 : " + completion.msg.content!.products[0].photoUrl!)
+                                let noti = NotiObject()
+                                noti.isProduct = true
+                                noti.briefDesc = completion.msg.content!.products[0].productBriefDescription
+                                noti.detailDesc = completion.msg.content!.products[0].productDetailDescription
+                                noti.originPrice = completion.msg.content!.products[0].originPrice
+                                noti.templateName = completion.msg.content!.products[0].templateName
+                                noti.others = completion.msg.content!.products[0].others
+                                noti.quantity = completion.msg.content!.products[0].quantity
+                                noti.discount = completion.msg.content!.products[0].discount
+                                noti.susplus = completion.msg.content!.products[0].surplus
+                                noti.photoURL = completion.msg.content!.products[0].photoUrl
+                                noti.beaconID = item.id
+                                self.delegate?.updateScanBeaconResult!(noti)
                             }
-                            
                             
                             //資料回傳成功
                             if completion.msg.content!.coupons.count > 0{
-                                print("已取得 " + item.id! + " 資料; photoUrl: " + completion.msg.content!.coupons[0].photoUrl!)
+                                let noti = NotiObject()
+                                noti.isProduct = false
+                                noti.briefDesc = completion.msg.content!.coupons[0].couponBriefDescription
+                                noti.detailDesc = completion.msg.content!.coupons[0].couponDetailDescription
+                                noti.templateName = completion.msg.content!.coupons[0].templateName
+                                noti.others = completion.msg.content!.coupons[0].others
+                                noti.quantity = completion.msg.content!.coupons[0].quantity
+                                noti.susplus = completion.msg.content!.coupons[0].surplus
+                                noti.photoURL = completion.msg.content!.coupons[0].photoUrl
+                                noti.beaconID = item.id
+                                self.delegate?.updateScanBeaconResult!(noti)
                             }
-                            
                         }
                         else{
                             print ("Fail")
                         }
-                        
-                        
                     }
-                    
-                    
                     message_list.append(value)
                 }
                 
